@@ -1,11 +1,11 @@
-package c_etc;
+package com.multi.algo.day03;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class A_배열과컬렉션변환 {
+public class A_ArrCollTrnas {
 
     public static void main(String[] args) {
         int[] s = { 5, 2, 1, 9, 11, 15, 17 };
@@ -72,6 +72,8 @@ public class A_배열과컬렉션변환 {
         }
 
         System.out.println(Arrays.toString(s4));
+
+        String[] s5 = list.toArray(new String[0]);
 
     }
 }
