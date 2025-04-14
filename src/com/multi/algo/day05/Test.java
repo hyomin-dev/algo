@@ -8,27 +8,28 @@ public class Test {
     public static void main(String[] args) {
         Test test = new Test();
         //["mislav", "stanko", "mislav", "ana"]	["stanko", "ana", "mislav"]
-        System.out.println(test.solution(new String[]{"marina", "josipa", "nikola", "vinko", "filipa"}, new String[]{"josipa", "filipa", "marina", "nikola"}));
+        System.out.println(test.solution(new int[]{2, 1, 1, 2, 3, 1, 2, 3, 1}));
 
     }
-    public String solution(String[] participant, String[] completion) {
+    public int solution(int[] ingredient) {
 
-        Map<String, Integer> map = new HashMap<>();
-        for(String str:participant){
-            map.put(str,map.getOrDefault(str,0)+1);
-        }
+        //햄버거 포장하는 일
+        // 순서: 빵 야채 고기 빵 순서대로 쌓인 햄버거만 포장
+        // 빵: 1, 야채: 2, 고기: 3
+        // 1 2 3 1
 
-        for(String str:completion){
-            map.put(str,map.get(str)-1);
-        }
-
-        for(String str:map.keySet())
-            if(map.get(str)==1)
-                return str;
-
-        return "";
-
+        //
+        int answer = 0;
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack2 = null;
+        for (int i = ingredient.length-1; i >=0; i--)
+            stack.push(ingredient[i]);
+        int[] arr = new int[]{1,2,3,1};
+        int count=3;
 
 
+
+
+        return answer;
     }
 }
