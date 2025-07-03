@@ -9,11 +9,11 @@ public class QuickSort {
         count ++;
         if (start >= end) return; // 원소가 1개인 경우 종료
 
-//        //랜덤 pivot
-//        int pivotIndex = start+(int)(Math.random()*(end-start+1));
-//        int temp = arr[pivotIndex];
-//        arr[pivotIndex] = arr[start];
-//        arr[start] = temp;
+        //랜덤 pivot
+        int pivotIndex = start+(int)(Math.random()*(end-start+1));
+        int temp = arr[pivotIndex];
+        arr[pivotIndex] = arr[start];
+        arr[start] = temp;
 
 
         int pivot = start; // 피벗은 첫 번째 원소
@@ -26,13 +26,13 @@ public class QuickSort {
             while (right > start && arr[right] >= arr[pivot]) right--;
             // 엇갈렸다면 작은 데이터와 피벗을 교체
             if (left > right) {
-                int temp = arr[pivot];
+                temp = arr[pivot];
                 arr[pivot] = arr[right];
                 arr[right] = temp;
             }
             // 엇갈리지 않았다면 작은 데이터와 큰 데이터를 교체
             else {
-                int temp = arr[left];
+                temp = arr[left];
                 arr[left] = arr[right];
                 arr[right] = temp;
             }

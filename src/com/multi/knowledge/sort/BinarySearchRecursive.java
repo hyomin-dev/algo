@@ -16,7 +16,7 @@ public class BinarySearchRecursive {
 
     static int binarySearch(int[] array, int target, int start, int end){
 
-        if(start>end) // start와 end가 같을 때 start == end == x인 경우 x와 x-1 또는 x+1과 x이므로 start>end인 경우임
+        if(start>end) // start와 end가 같을 때(원소가 한개 남았을 때), start == end == x인 경우 x와 x-1 또는 x+1과 x이므로 start>end인 경우임
             return -1;
 
         int mid = (start+end)/2;
