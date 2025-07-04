@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class P_13023 {
-    public static boolean[] visited;
-    public static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-    public static int count;
+    static boolean[] visited;
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static int depth;
+    static int result=0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,10 +20,8 @@ public class P_13023 {
         int n = Integer.parseInt(st.nextToken()); // node 수
         int m = Integer.parseInt(st.nextToken()); // edge 수
 
-
-
         for(int i=0;i<n;i++)
-            graph.add(new ArrayList<Integer>());
+            graph.add(new ArrayList<>());
 
         int i=0;
         while(i<m){
@@ -36,33 +35,49 @@ public class P_13023 {
             i++;
         }
 
-        boolean hasFriend = false;
-        for(int k=0;k<n&&!hasFriend;k++){ //모든 노드 반복문처리
-            count = 0;
+        for(i=0;i<n;i++){
+            depth = 1;
             visited = new boolean[n];
-            dfs(k);
-            if(count >=5){
-                hasFriend = true;
+            visited[i] = true;
+            dfs(i);
+            if(result ==1)
                 break;
-            }
         }
 
-        if(hasFriend)
-            bw.write("1");
-        else
-            bw.write("0");
+        bw.write(String.valueOf(result));
         bw.flush();
         bw.close();
         br.close();
     }
 
     public static void dfs(int node){
-        visited[node] = true;
-        count ++;
+
+        if(depth==5){
+            result = 1;
+        }
+
+        if(result ==1)
+            return;
+
         for(int i=0;i<graph.get(node).size();i++){
             int adjacentNode = graph.get(node).get(i);
-            if(!visited[adjacentNode])
+            if(!visited[adjacentNode]) {
+                depth++;
+                visited[adjacentNode] = true;
                 dfs(adjacentNode);
+                visited[adjacentNode] = false;
+                depth--;
+            }
         }
     }
 }
+
+/*
+* 반례:
+* 5 5
+0 2
+2 4
+0 1
+0 3
+1 2
+* */
