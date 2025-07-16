@@ -1,16 +1,16 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
-
     static int n;
     static int k;
-    static int[] distArray = new int[100000+1];
-    static ArrayList<ArrayList<Node13549>> graph = new ArrayList<>();
+    static boolean[] visited = new boolean[100000+1];
+    static int minTime = Integer.MAX_VALUE;
+
     public static void main(String[] args) throws IOException {
-
-        final int INF = (int)1e9;
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
@@ -20,27 +20,9 @@ public class Main {
         n = Integer.parseInt(st.nextToken()); // 수빈 위치
         k = Integer.parseInt(st.nextToken()); // 동생 위치
 
-        Arrays.fill(distArray,INF);
+        bfs(n);
 
-        for(int i=0;i<=100000;i++)
-            graph.add(new ArrayList<>());
-
-       for(int i=0;i<=100000;i++){
-
-           if(i+1<=100000)
-               graph.get(i).add(new Node13549(i+1,1)); // i 노드에서 i+1 노드는 1초가 걸림, 이를 반영
-
-           if(i-1>=0)
-               graph.get(i).add(new Node13549(i-1,1)); // i 노드에서 i-1 노드는 1초가 걸림, 이를 반영
-
-           if(2*i<=100000)
-               graph.get(i).add(new Node13549(2*i,0)); // i노드에서 2*i 노드는 0초가 걸림, 이를 반영
-
-       }
-
-        dijkstra(n);
-
-        bw.write(String.valueOf(distArray[k]));
+        bw.write(String.valueOf(minTime));
 
         bw.flush();
         bw.close();
@@ -48,71 +30,36 @@ public class Main {
 
     }
 
-    static void dijkstra(int start){
+    static void bfs(int start){
+        Queue<int[]> q = new LinkedList<>();
 
-        PriorityQueue<Node13549> pq = new PriorityQueue<>();
-        pq.offer(new Node13549(start,0));
-        distArray[start] = 0;
+        q.offer(new int[]{start,0});
+        visited[start] = true;
 
-        while(!pq.isEmpty()){
+        while(!q.isEmpty()){
 
-            Node13549 node = pq.poll();
+            int[] node = q.poll();
 
-            int now = node.getIndex();
-            int time = node.getTime();
-            
-            if(now==k)
-                break;
+            int now = node[0];
+            int time = node[1];
+            visited[now] = true;
 
-            if(distArray[now]<time) // 이미 최단 시간을 구한 경우
-                continue;
+            if(now==k&&time<minTime)
+                minTime = time;
 
-            for(int i=0;i<graph.get(now).size();i++){
+            if(now+1<=100000&&!visited[now+1]) {
+                q.offer(new int[]{now+1,time+1});
+            }
 
-                int index = graph.get(now).get(i).getIndex();
-                int cost = distArray[now]+graph.get(now).get(i).getTime();
-                if(cost<distArray[index]){
-                    distArray[index] = cost;
-                    pq.offer(new Node13549(index, cost));
-                }
+            if(now-1>=0&&!visited[now-1]){
+                q.offer(new int[]{now-1,time+1});
+            }
 
+            if(2*now<=100000&&!visited[2*now]){
+                q.offer(new int[]{2*now,time});
             }
 
         }
-    }
 
-
-}
-
-class Node13549 implements Comparable<Node13549>{
-    int index;
-    int time;
-
-    public Node13549(int index, int distance){
-        this.index = index;
-        this.time = distance;
-    }
-
-    int getIndex(){
-        return this.index;
-    }
-
-    int getTime(){
-        return this.time;
-    }
-
-    @Override
-    public int compareTo(Node13549 o){
-        if(this.time!=o.time)
-            return this.time - o.time;
-
-        return 0;
     }
 }
-
-/*
-현재 위치: X
-순간이동: 2*X
-1초 후: X-1 또는 X+1
-
-* */
