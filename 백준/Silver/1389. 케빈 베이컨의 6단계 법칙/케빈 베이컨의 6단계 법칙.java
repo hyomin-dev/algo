@@ -93,7 +93,7 @@ class Node1389 implements Comparable<Node1389>{
         if(this.count!=o.getCount())
             return this.count - o.getCount();
 
-        if(this.index==o.getCount()){
+        if(this.index==o.getIndex()){
             return this.index - o.getIndex();
         }
 
