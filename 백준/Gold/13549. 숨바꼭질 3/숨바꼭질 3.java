@@ -29,7 +29,7 @@ public class Main {
 
            if(i+1<=100000)
                graph.get(i).add(new Node13549(i+1,1)); // i 노드에서 i+1 노드는 1초가 걸림, 이를 반영
-           
+
            if(i-1>=0)
                graph.get(i).add(new Node13549(i-1,1)); // i 노드에서 i-1 노드는 1초가 걸림, 이를 반영
 
@@ -60,6 +60,9 @@ public class Main {
 
             int now = node.getIndex();
             int time = node.getTime();
+            
+            if(now==k)
+                break;
 
             if(distArray[now]<time) // 이미 최단 시간을 구한 경우
                 continue;
@@ -77,6 +80,7 @@ public class Main {
 
         }
     }
+
 
 }
 
