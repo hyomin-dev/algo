@@ -1,4 +1,4 @@
-package com.multi.baekjoon.binary_search;
+package com.multi.baekjoon.binary_search_tree;
 
 
 import java.io.*;
