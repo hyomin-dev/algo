@@ -14,23 +14,27 @@ public class Main {
         int n2Up = Integer.parseInt(st.nextToken());
         int n2Down = Integer.parseInt(st.nextToken());
 
+
         int nUp = n1Up*n2Down + n2Up*n1Down;
         int nDown = n1Down*n2Down;
 
-        int end = Math.min(nUp,nDown);
-        for(int i=end;i>=2;i--){
-            if(nUp%i==0&&nDown%i==0){
-                nUp = nUp/i;
-                nDown = nDown/i;
-                break;
-            }
-        }
+        if(nUp==nDown)
+            bw.write("1 1");
+        else{
+            int gcd = euclidean(Math.max(nUp,nDown),Math.min(nUp,nDown));
 
-        bw.write(nUp+" "+nDown);
+            bw.write(nUp/gcd+" "+nDown/gcd);
+        }
 
         bw.flush();
         bw.close();
         br.close();
 
+    }
+
+    static int euclidean(int a, int b){
+        if(b==0)
+            return a;
+        return euclidean(b, a%b); // 나누는 수, r
     }
 }
