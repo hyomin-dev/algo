@@ -1,11 +1,12 @@
-package com.multi.baekjoon.greedy;
+package com.multi.baekjoon.tmp;
 
 
 import java.io.*;
 import java.util.*;
 
-public class P_11047 {
+public class P_11050 {
     public static void main(String[] args) throws IOException{
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
@@ -14,22 +15,16 @@ public class P_11047 {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        int[] array = new int[n];
-
-        for(int i=0;i<n;i++)
-            array[i] = Integer.parseInt(br.readLine());
-
-        int count = 0;
-        for(int i=n-1;i>=0;i--){
-            if(array[i]>k)
-                continue;
-            count += k/array[i];
-            k = k%array[i];
-            if(k==0)
-                break;
+        int up = 1;
+        for(int i=n;i>n-k;i--){
+            up *=i;
         }
 
-        bw.write(count+"");
+        int down = 1;
+        for(int i=1;i<=k;i++){
+            down *=i;
+        }
+        bw.write(up/down+"");
 
         bw.flush();
         bw.close();

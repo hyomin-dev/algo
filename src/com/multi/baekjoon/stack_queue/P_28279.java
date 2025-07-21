@@ -2,7 +2,9 @@ package com.multi.baekjoon.stack_queue;
 
 
 import java.io.*;
-import java.util.ArrayList;
+
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class P_28279 {
@@ -16,8 +18,8 @@ public class P_28279 {
 
         int i =0;
 
-        ArrayList<Integer> list = new ArrayList<>();
-        while(i<n){
+        Deque<Integer> deque = new LinkedList<>();
+        while(n>0){
 
             StringTokenizer st = new StringTokenizer(br.readLine());
             String command = st.nextToken();
@@ -25,43 +27,60 @@ public class P_28279 {
             if(command.equals("1")){
 
                 int x = Integer.parseInt(st.nextToken());
-                list.add(x);
+                deque.offerFirst(x);
 
             }else if(command.equals("2")){
 
-                if(list.isEmpty())
-                    bw.write("-1");
-                else {
-                    int num = list.get(list.size()-1);
-                    list.remove(list.size()-1);
-                    bw.write(String.valueOf(num));
-                }
-                bw.newLine();
+                int x = Integer.parseInt(st.nextToken());
+                deque.offerLast(x);
 
             }else if(command.equals("3")){
 
-                bw.write(String.valueOf(list.size()));
+                if(deque.isEmpty())
+                    bw.write("-1");
+                else
+                    bw.write(String.valueOf(deque.pollFirst()));
+
                 bw.newLine();
 
             }else if(command.equals("4")){
 
-                if(list.isEmpty())
-                    bw.write("1");
+                if(deque.isEmpty())
+                    bw.write("-1");
                 else
-                    bw.write("0");
+                    bw.write(String.valueOf(deque.pollLast()));
 
                 bw.newLine();
 
             }else if(command.equals("5")){
 
-                if(list.isEmpty())
+                bw.write(String.valueOf(deque.size()));
+                bw.newLine();
+            } else if(command.equals("6")){
+
+                if(deque.isEmpty())
+                    bw.write("1");
+                else
+                    bw.write("0");
+
+                bw.newLine();
+            }else if(command.equals("7")){
+                if(deque.isEmpty())
                     bw.write("-1");
                 else
-                    bw.write(String.valueOf(list.get(list.size()-1)));
+                    bw.write(String.valueOf(deque.peekFirst()));
+
+                bw.newLine();
+            }else if(command.equals("8")){
+                if(deque.isEmpty())
+                    bw.write("-1");
+                else
+                    bw.write(String.valueOf(deque.peekLast()));
+
                 bw.newLine();
             }
 
-            i++;
+            n--;
         }
 
         bw.flush();
