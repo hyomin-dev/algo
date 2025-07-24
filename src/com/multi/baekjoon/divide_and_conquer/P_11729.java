@@ -4,35 +4,34 @@ import java.io.*;
 import java.util.*;
 
 public class P_11729 {
-    static Stack<Integer> stack1 = new Stack<>();
-    static Stack<Integer> stack2 = new Stack<>();
-    static Stack<Integer> stack3 = new Stack<>();
+
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     static int count = 0;
+    static ArrayList<String> resultList = new ArrayList<>();
     public static void main(String[] args) throws IOException {
-
 
         int n = Integer.parseInt(br.readLine());
 
-        for(int i=n;i>0;i--)
-            stack1.push(i);
+        moveStone(n, 1,3, 2 );
 
-        if(n%2==0) {
-            count++;
-            moveStone(n, 1,3, );
+        bw.write(count+"\n");
+        for(String result: resultList)
+            bw.write(result+"\n");
 
-        }
-        else {
-            count++;
-            moveStone(1, 2);
-        }
+        bw.flush();
+        bw.close();
+        br.close();
+
     }
 
-    static void moveStone(int n, int from, int dest, int mid) throws IOException{
+    static void moveStone(int n, int from, int dest, int rest) {
         if(n==0)
             return;
-
+        moveStone(n-1,from,rest,dest);
+        resultList.add(from+" "+dest);
+        count++;
+        moveStone(n-1,rest,dest,from);
 
     }
 }
@@ -41,4 +40,9 @@ public class P_11729 {
 최초 원판 개수가 홀수 --> 3으로 시작
 
 최초 원판 개수가 짝수 --> 2로 시작
+
+n을 목적지로 옮기기 위해서 --> n-1을 나머지 기둥에 놓는다. --> n을 목적지로 옮긴다. --> n-1을 목적지로 옮긴다.
+
+이 과정을 반복
+
 * */
