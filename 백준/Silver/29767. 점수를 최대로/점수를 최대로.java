@@ -14,13 +14,9 @@ public class Main {
         long[] array = new long[n];
 
         st = new StringTokenizer(br.readLine());
-        for(int i=0;i<n;i++)
-            array[i] = Integer.parseInt(st.nextToken());
-
-
-        for(int i=1;i<n;i++) {
-            array[i] = array[i] + array[i-1];
-        }
+        array[0] = Integer.parseInt(st.nextToken());
+        for(int i=1;i<n;i++)
+            array[i] = array[i-1] + Integer.parseInt(st.nextToken());     
 
         Arrays.sort(array);
 
