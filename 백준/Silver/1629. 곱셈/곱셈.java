@@ -22,17 +22,17 @@ public class Main {
 
     }
 
-    static long multiply(long num, long index, long rest){
+     static long multiply(long num, long index, long rest){
         if(index==1)
             return num%rest;
         else if(index%2==0){
             long half = index/2;
             long result1 = multiply(num,half,rest);
-            return (result1%rest*result1%rest)%rest;
+            return (result1*result1)%rest;
         }else{
             long half = index/2;
             long result1 = multiply(num,half,rest);
-            return (result1%rest*result1%rest*num%rest)%rest;
+            return ((result1*result1)%rest*num%rest)%rest;
         }
     }
 }
