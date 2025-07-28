@@ -1,7 +1,7 @@
 package com.multi.baekjoon.cumulative_sum_analysis;
 
- import java.io.*;
- import java.util.*;
+import java.io.*;
+import java.util.*;
 
 public class P_2470 {
     public static void main(String[] args) throws IOException{
@@ -27,26 +27,68 @@ public class P_2470 {
             int end = n-1;
             ArrayList<int[]> list = new ArrayList<>();
 
+            // array[start] + array[end] > 0 --> end를 줄여서 0에 가까워지도록
+
+            // array[start] + array[end] <0 --> start를 키워서 0에 가까워지도록
+
             for(int start=0;start<n-1;start++){
+                if(start>=end)
+                    break;
+
                 int sum = array[start] + array[end];
                 int sumAbs = Math.abs(sum);
-                if(sum==0){
+                if(sum==0){ // start를 갱신
+                    minValue = 0;
+                    list = new ArrayList<>();
                     list.add(new int[]{array[start], array[end]});
                     break;
                 }
-
-                if(sumAbs <minValue)
+                if(sumAbs <minValue) { // start를 갱신했을 때 체크
                     minValue = sumAbs;
+                    list = new ArrayList<>();
+                    list.add(new int[]{array[start], array[end]});
+                }
 
                 // Math.abs
 
                 while(sum>0){
 
-                }
+                    end--;
+                    if(start>=end){
+                        end++; // 감소 시킨 것 취소 후
+                        break;
+                    }
+                    sum = array[start] + array[end];
+                    if(sum==0){ // end를 갱신 후 확인
+                        minValue = 0;
+                        list = new ArrayList<>();
+                        list.add(new int[]{array[start], array[end]});
+                        break;
+                    }
 
+                    sumAbs = Math.abs(sum);
+
+                    if(sumAbs <minValue) { // end를 갱신했을 때 체크
+                        minValue = sumAbs;
+                        list = new ArrayList<>();
+                        list.add(new int[]{array[start], array[end]});
+                    }
+
+                }
+                if(sum==0)
+                    break;
+
+            }
+
+            if(minValue!=Integer.MAX_VALUE){
+                int[] result = list.get(0);
+                bw.write(result[0]+" "+result[1]);
             }
         }
 
+        bw.flush();
+        bw.close();
+        br.close();
 
     }
 }
@@ -58,6 +100,10 @@ public class P_2470 {
 
 두 용액의 특성은 오름차순으로 출력
 
-0에 가까운 특성값이
+0이 없으면 0에 가까운 특성값이 출력되도록
+
+array[start] + array[end] > 0 --> end를 줄여서 0에 가까워지도록
+
+array[start] + array[end] <0 --> start를 키워서 0에 가까워지도록
 
 * */
