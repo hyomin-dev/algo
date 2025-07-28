@@ -28,7 +28,7 @@ public class Main {
         else if(index%2==0){
             long half = index/2;
             long result1 = multiply(num,half,rest);
-            return (result1*result1)%rest;
+            return (result1%rest*result1%rest)%rest;
         }else{
             long half = index/2;
             long result1 = multiply(num,half,rest);
