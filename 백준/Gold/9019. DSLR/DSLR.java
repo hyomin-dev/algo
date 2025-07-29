@@ -33,7 +33,7 @@ public class Main {
         visited[a] = true;
 
         Queue<Data9019> queue = new ArrayDeque<>();
-        queue.offer(new Data9019(a,0,""));
+        queue.offer(new Data9019(a,""));
 
         while(!queue.isEmpty()){
 
@@ -46,45 +46,30 @@ public class Main {
             //D
             int operD = data.num*2 %10000;
             if(!visited[operD]) {
-                queue.offer(new Data9019(operD, data.count + 1,data.oper+"D" ));
+                queue.offer(new Data9019(operD, data.oper+"D" ));
                 visited[operD] = true;
             }
 
             //S
             int operS = data.num==0 ? 9999 : data.num-1;
             if(!visited[operS]) {
-                queue.offer(new Data9019(operS, data.count + 1, data.oper+"S"));
+                queue.offer(new Data9019(operS,  data.oper+"S"));
                 visited[operS] = true;
             }
 
-            // L과 S를 위해 data.num을 String으로 변경
-
-            String numStr = "";
-
-            if(data.num>=1000){
-                numStr = String.valueOf(data.num);
-
-            }else if(data.num>=100){
-                numStr = "0"+data.num;
-
-            }else if(data.num>=10){
-                numStr = "00"+data.num;
-            }else
-                numStr = "000"+data.num;
-
             //L
 
-            int operL = Integer.parseInt(numStr.substring(1,4) + numStr.substring(0,1));
+            int operL = (data.num%1000)*10+data.num/1000;
             if(!visited[operL]) {
-                queue.offer(new Data9019(operL, data.count + 1, data.oper+"L"));
+                queue.offer(new Data9019(operL, data.oper+"L"));
                 visited[operL] = true;
             }
 
             //R
 
-            int operR = Integer.parseInt(numStr.substring(3,4)+numStr.substring(0,3) );
+            int operR = data.num/10 +(data.num%10)*1000;
             if(!visited[operR]) {
-                queue.offer(new Data9019(operR, data.count + 1, data.oper+"R"));
+                queue.offer(new Data9019(operR, data.oper+"R"));
                 visited[operR] = true;
             }
         }
@@ -95,12 +80,10 @@ public class Main {
 
 class Data9019{
     int num;
-    int count;
     String oper;
 
-    public Data9019(int num, int count, String oper){
+    public Data9019(int num,  String oper){
         this.num = num;
-        this.count = count;
         this.oper = oper;
     }
 }
