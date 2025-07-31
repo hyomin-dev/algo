@@ -34,13 +34,11 @@ public class Main {
             int bagWeight = bag.poll();
 
             while(!jewels.isEmpty()){
-
-                Jewel1202 now = jewels.poll();
-
-                if(now.getWeight()>bagWeight){ // 꺼낸 보석의 무게가 가방의 무게보다 큰 경우
-                    jewels.offer(now);
+                
+                if(jewels.peek().getWeight()>bagWeight){ // 꺼낼 보석의 무게가 가방의 무게보다 큰 경우                    
                     break;
                 }else{ // 꺼낸 보석의 무게가 가방의 무게보다 작다면 가치를 기준으로 내림차순하는 우선순위 큐에 삽입
+                    Jewel1202 now = jewels.poll();
                     jewelsValue.offer(new JewelValue1202(now.getWeight(), now.getValue()));
                 }
             }
