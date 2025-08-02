@@ -3,8 +3,8 @@ package com.multi.baekjoon.cumulative_sum_analysis;
 import java.io.*;
 import java.util.*;
 
-public class P_2470 {
-    public static void main(String[] args) throws IOException{
+public class P_2467 {
+    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -43,7 +43,7 @@ public class P_2470 {
                     list.add(new int[]{array[start], array[end]});
                     break;
                 }
-                if(sumAbs < minValue) { // start를 갱신했을 때 체크
+                if(sumAbs <=minValue) { // start를 갱신했을 때 체크
                     minValue = sumAbs;
                     list = new ArrayList<>();
                     list.add(new int[]{array[start], array[end]});
@@ -68,12 +68,11 @@ public class P_2470 {
 
                     sumAbs = Math.abs(sum);
 
-                    if(sumAbs <minValue) { // end를 갱신했을 때 체크
+                    if(sumAbs <=minValue) { // end를 갱신했을 때 체크
                         minValue = sumAbs;
                         list = new ArrayList<>();
                         list.add(new int[]{array[start], array[end]});
                     }
-
                 }
                 if(sum==0)
                     break;
@@ -107,3 +106,5 @@ array[start] + array[end] > 0 --> end를 줄여서 0에 가까워지도록
 array[start] + array[end] <0 --> start를 키워서 0에 가까워지도록
 
 * */
+
+
