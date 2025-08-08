@@ -18,17 +18,7 @@ public class Main {
         for(int i=1;i<=n;i++) // 빈칸 채우기
             Arrays.fill(matrix[i],' ');
 
-        int start = n;
-        int end = n;
-
-        for(int y=1;y<=n;y++){ // 별로 채우기
-            for(int x=start;x<=end;x++)
-                matrix[y][x] = '*';
-            start--;
-            end++;
-        }
-
-        star(n,n/2+1,n);
+        star(n,n,1); // 별의 꼭대기 위치
 
         for(int y=1;y<=n;y++){
             for(int x=1;x<=2*n;x++){
@@ -47,33 +37,26 @@ public class Main {
     높이: n/2+1
     중앙
     * */
-    static void star(int n, int h, int mid){
+    static void star(int n, int x, int y){ // x,y : 삼각형의 별 꼭대기의 위치
+
+        if(n==3){
+            matrix[y][x] = '*';
+            matrix[y+1][x-1] = '*';
+            matrix[y+1][x+1] = '*';
+            for(int i=x-2;i<=x+2;i++)
+                matrix[y+2][i] = '*';
+            return;
+        }
 
         int halfN = n/2;
-        //빈 칸
-        int start = mid-(halfN-1); // 시작열
-        int end = mid +(halfN-1); // 끝나는 열
-        for(int y=h;y<h+halfN;y++){
-            for(int x=start;x<=end;x++)
-                matrix[y][x] = ' ';
-            start++;
-            end--;
-
-        }
-        if(n==3)
-            return;
-
         // 위쪽
-        if(n==6)
-            star(halfN,h-2,mid);
-        else
-            star(halfN,h-(halfN/2),mid);
+        star(halfN, x,y);
 
         // 왼쪽
-        star(halfN, h+(halfN/2),mid-halfN);
+        star(halfN, x-halfN,y+halfN);
 
         // 오른쪽
-        star(halfN,h+(halfN/2),mid+halfN);
+        star(halfN, x+halfN,y+halfN);
 
     }
 }
