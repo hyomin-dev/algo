@@ -57,3 +57,12 @@ public class Main {
         br.close();
     }
 }
+/*
+
+
+1. 각 배열의 누적합을 구한다
+
+2. 누적합을 이용해 각 배열의 전체 부분합을 HashMap에 담는다.
+
+3. HashMap A와 HashMap B에서 합이 T가 되는 것들을 구한다.
+* */
