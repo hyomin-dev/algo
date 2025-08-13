@@ -35,3 +35,7 @@ public class LowerBound {
 
     }
 }
+/*
+
+lower bound의 정의를 기억
+* */
