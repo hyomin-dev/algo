@@ -5,14 +5,9 @@ class Solution {
         if(my_string.length()<is_prefix.length())
             return answer;
         
-        for(int i=0;i<is_prefix.length();i++){
-            if(is_prefix.charAt(i)==my_string.charAt(i)){
-                if(i==(is_prefix.length()-1))
-                    answer = 1;
-            }                
-            else
-                break;
-        }
+        String subString = my_string.substring(0,is_prefix.length());
+        if(subString.equals(is_prefix))
+            answer = 1;
         
         return answer;
     }
