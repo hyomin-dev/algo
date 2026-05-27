@@ -4,9 +4,8 @@ class Solution {
         String kStr = String.valueOf(k);
         
         for(int n=i;n<=j;n++){
-            String nStr = String.valueOf(n);            
-            for(int idx=0;idx<nStr.length();idx++){
-                String str = String.valueOf(nStr.charAt(idx));
+            String[] nSplitArr = String.valueOf(n).split("");            
+            for(String str:nSplitArr){
                 if(str.equals(kStr))
                     count++;
             }
