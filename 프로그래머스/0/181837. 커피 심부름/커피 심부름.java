@@ -1,0 +1,18 @@
+class Solution {
+    public int solution(String[] order) {
+        int answer = 0;
+        String americano = "americano";
+        String cafelatte = "cafelatte";
+        
+        for(String str:order){
+            if(str.contains(americano))
+                answer +=4500;
+            else if(str.contains(cafelatte))
+                answer +=5000;
+            else
+                answer +=4500;
+        }
+        
+        return answer;
+    }
+}
